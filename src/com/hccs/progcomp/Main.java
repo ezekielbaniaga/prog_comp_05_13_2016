@@ -14,32 +14,30 @@ import java.util.Set;
 
 public class Main {
 	
-	private static File f, fout;
-	private static BufferedReader reader;
-	private static FileWriter fw;
+  private static File f, fout;
+  private static BufferedReader reader;
+  private static FileWriter fw;
 	
-	private static int nMin, nMax, mMin, mMax;
+  private static int nMin, nMax, mMin, mMax;
 
-	/**
-	 * @param args
-	 * @throws Exception
-	 */
-	public static void main( String[] args ) throws Exception {
-        f = new File("D:/prog comp/A-small-practice.in");
-//        f = new File("D:/prog comp/A-large-practice.in");
-        fout = new File("D:/prog comp/lorelie_jeretth_ezekiel_Small.txt");
-//        fout = new File("D:/prog comp/lorelie_jeretth_ezekiel_Large.txt");
-        reader = new BufferedReader( new InputStreamReader( new FileInputStream( f )) );
-        fw = new FileWriter( fout );
+  /**
+   * @param args
+   * @throws Exception
+   */
+  public static void main( String[] args ) throws Exception {
+    f = new File("D:/prog comp/A-small-practice.in");
+    fout = new File("D:/prog comp/lorelie_jeretth_ezekiel_Small.txt");
+    reader = new BufferedReader( new InputStreamReader( new FileInputStream( f )) );
+    fw = new FileWriter( fout );
+	  
+    if (f.length() > 100 * 1024) {
+      fw.write( "File input is longer than 100KB" );
+      System.out.println( "File input is longer than 100KB" );
 
-        if (f.length() > 100 * 1024) {
-        	fw.write( "File input is longer than 100KB" );
-        	System.out.println( "File input is longer than 100KB" );
-
-        	fw.flush();
-        	fw.close();
-        	System.exit( 0 );
-        }
+      fw.flush();
+      fw.close();
+      System.exit( 0 );
+    }
 
 		int t, n, m; // primary vars
 		String nm;
@@ -48,23 +46,17 @@ public class Main {
 		nMin = 0; nMax = 10;
 		mMin = 1; mMax = 10;
 
-		//large dataset
-//		nMin = 0; nMax = 100;
-//		mMin = 1; mMax = 100;
-
-
 		// Get # of test cases
 		t = getInt();
 
 		if ( !validateNumTestCase( t ) ) {
-			
 			String message = "Number of Test Case is invalid";
 			fw.write( message );
-        	System.out.println( message );
+      System.out.println( message );
 
-        	fw.flush();
-        	fw.close();
-        	System.exit( 0 );
+      fw.flush();
+      fw.close();
+      System.exit( 0 );
 		}
 
 		List<String> caseResult = new ArrayList<>();
@@ -74,7 +66,6 @@ public class Main {
 			nm = get();
 
 			// validation
-
 			String[] nmArr = nm.split( " " );
 
 			n = Integer.valueOf( nmArr[0] );
@@ -82,25 +73,24 @@ public class Main {
 
 			// validation
 			if (!validateN( n )) {
-                String message = "N input is invalid";
-                fw.write( message );
-                System.out.println( message );
+        String message = "N input is invalid";
+        fw.write( message );
+        System.out.println( message );
 
-                fw.flush();
-                fw.close();
-                System.exit( 0 );
+        fw.flush();
+        fw.close();
+        System.exit( 0 );
 			}
 			
 			if (!validateM( m )) {
-                String message = "M input is invalid";
-                fw.write( message );
-                System.out.println( message );
+        String message = "M input is invalid";
+        fw.write( message );
+        System.out.println( message );
 
-                fw.flush();
-                fw.close();
-                System.exit( 0 );
+        fw.flush();
+        fw.close();
+        System.exit( 0 );
 			}
-
 
 			// path input
 			Set<String> existingDir = new HashSet<>();
@@ -109,16 +99,14 @@ public class Main {
 			for ( int d = 0; d < n; d++ ) {
 				String inp = replaceLastSlash( get() );
 
-                if (!validatePath( inp )) {
-                    String message = "Path length is > 100";
-                    fw.write( message );
-                    System.out.println( message );
+        if (!validatePath( inp )) {
+          String message = "Path length is > 100";
+          fw.write( message );
+          System.out.println( message );
 
-                    fw.flush();
-                    continue;
-//                    fw.close();
-//                    System.exit( 0 );
-                }
+          fw.flush();
+          continue;
+        }
 
 				addToExisting( inp, existingDir );
 			}
@@ -126,16 +114,14 @@ public class Main {
 			for ( int e = 0; e < m; e++ ) {
 				String inp = replaceLastSlash( get() );
 
-                if (!validatePath( inp )) {
-                    String message = "Path length is > 100";
-                    fw.write( message );
-                    System.out.println( message );
+        if (!validatePath( inp )) {
+          String message = "Path length is > 100";
+          fw.write( message );
+          System.out.println( message );
 
-                    fw.flush();
-                    continue;
-//                    fw.close();
-//                    System.exit( 0 );
-                }
+          fw.flush();
+          continue;
+        }
 
 				pathsM.add( inp );
 			}
@@ -168,7 +154,7 @@ public class Main {
 
 		int count=0;
 
-        for (int i=1; i<inp.length; i++) {
+    for (int i=1; i<inp.length; i++) {
 			String fullpath = "";
 			
 			for (int j=1; j<=i; j++) {
@@ -182,7 +168,7 @@ public class Main {
 			}
 		}
 
-        return count;
+    return count;
 	}
 	
 	private static void addToExisting(String input, Set<String> set) {
@@ -219,17 +205,12 @@ public class Main {
 		return path.length() <= 100;
 	}
 
-
 	private static String get() throws Exception {
-//		BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
 		String line = reader.readLine();
-
 		return line;
 	}
-
 
 	private static int getInt() throws Exception {
 		return Integer.valueOf( get() );
 	}
-
 }
